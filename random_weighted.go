@@ -2,6 +2,7 @@ package weighted
 
 import (
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -16,7 +17,9 @@ type RandW struct {
 	items        []*randWeighted
 	n            int
 	sumOfWeights int
-	r            *rand.Rand
+
+	locked sync.Mutex
+	r      *rand.Rand
 }
 
 // NewRandW creates a new RandW with a random object.
@@ -29,7 +32,11 @@ func (rw *RandW) Next() (item interface{}) {
 	if rw.n == 0 {
 		return nil
 	}
+
+	rw.locked.Lock()
 	randomWeight := rw.r.Intn(rw.sumOfWeights)
+	rw.locked.Unlock()
+
 	for _, item := range rw.items {
 		randomWeight = randomWeight - item.Weight
 		if randomWeight <= 0 {
@@ -60,10 +67,15 @@ func (rw *RandW) All() map[interface{}]int {
 // RemoveAll removes all weighted items.
 func (rw *RandW) RemoveAll() {
 	rw.items = make([]*randWeighted, 0)
+
+	rw.locked.Lock()
 	rw.r = rand.New(rand.NewSource(time.Now().Unix()))
+	rw.locked.Unlock()
 }
 
 // Reset resets the balancing algorithm.
 func (rw *RandW) Reset() {
+	rw.locked.Lock()
 	rw.r = rand.New(rand.NewSource(time.Now().Unix()))
+	rw.locked.Unlock()
 }

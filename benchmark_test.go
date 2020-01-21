@@ -44,7 +44,9 @@ func BenchmarkRandW_Next(b *testing.B) {
 	}
 
 	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		w.Next()
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			w.Next()
+		}
+	})
 }

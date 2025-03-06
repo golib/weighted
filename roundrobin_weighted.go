@@ -58,7 +58,7 @@ func (w *RRW) RemoveAll() {
 	w.cw = 0
 }
 
-//Reset resets all current weights.
+// Reset resets all current weights.
 func (w *RRW) Reset() {
 	w.i = -1
 	w.cw = 0
@@ -95,7 +95,7 @@ func (w *RRW) Next() interface{} {
 func gcd(x, y int) int {
 	var t int
 	for {
-		t = (x % y)
+		t = x % y
 		if t > 0 {
 			x = y
 			y = t

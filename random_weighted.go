@@ -1,9 +1,8 @@
 package weighted
 
 import (
+	"math/rand/v2"
 	"time"
-
-	"golang.org/x/exp/rand"
 )
 
 // randWeighted is a wrapped weighted item that is used to implement weighted random algorithm.
@@ -22,16 +21,21 @@ type RandW struct {
 
 // NewRandW creates a new RandW with a random object.
 func NewRandW() *RandW {
-	return &RandW{r: rand.New(rand.NewSource(uint64(time.Now().UnixNano())))}
+	return &RandW{
+		r: rand.New(rand.NewPCG(uint64(time.Now().Unix()), uint64(time.Now().UnixMilli()))),
+	}
 }
 
-// Next returns next selected item.
+// Next returns selected item.
 func (rw *RandW) Next() (item interface{}) {
 	if rw.n == 0 {
 		return nil
 	}
+	if rw.sumOfWeights <= 0 {
+		return nil
+	}
 
-	randomWeight := rw.r.Intn(rw.sumOfWeights)
+	randomWeight := rw.r.IntN(rw.sumOfWeights) + 1
 	for _, item := range rw.items {
 		randomWeight = randomWeight - item.Weight
 		if randomWeight <= 0 {
@@ -62,10 +66,12 @@ func (rw *RandW) All() map[interface{}]int {
 // RemoveAll removes all weighted items.
 func (rw *RandW) RemoveAll() {
 	rw.items = make([]*randWeighted, 0)
-	rw.r = rand.New(rand.NewSource(uint64(time.Now().UnixNano())))
+	rw.n = 0
+	rw.sumOfWeights = 0
+	rw.r = rand.New(rand.NewPCG(uint64(time.Now().Unix()), uint64(time.Now().UnixMilli())))
 }
 
 // Reset resets the balancing algorithm.
 func (rw *RandW) Reset() {
-	rw.r = rand.New(rand.NewSource(uint64(time.Now().Unix())))
+	rw.r = rand.New(rand.NewPCG(uint64(time.Now().Unix()), uint64(time.Now().UnixMilli())))
 }

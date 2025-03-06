@@ -26,7 +26,7 @@ package main
 
 import "fmt"
 
-func ExampleW1_Next() {
+func ExampleSW_Next() {
 	w := &SW{}
 	w.Add("a", 5)
 	w.Add("b", 2)
@@ -46,8 +46,8 @@ package main
 
 import "fmt"
 
-func ExampleW2_Next() {
-	w := &W2{}
+func ExampleRRW_Next() {
+	w := &RRW{}
 	w.Add("a", 5)
 	w.Add("b", 2)
 	w.Add("c", 3)

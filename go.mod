@@ -1,5 +1,5 @@
 module github.com/golib/weighted
 
-go 1.12
+go 1.24.0
 
-require golang.org/x/exp v0.0.0-20200119233911-0405dc783f0a
+require golang.org/x/exp v0.0.0-20250305212735-054e65f0b394

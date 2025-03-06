@@ -1,4 +1,6 @@
-[![License](https://img.shields.io/:license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GoDoc](https://godoc.org/github.com/smallnest/weighted?status.png)](http://godoc.org/github.com/smallnest/weighted)  [![travis](https://travis-ci.org/smallnest/weighted.svg?branch=master)](https://travis-ci.org/smallnest/weighted) [![coveralls](https://coveralls.io/repos/smallnest/weighted/badge.svg?branch=master&service=github)](https://coveralls.io/github/smallnest/weighted?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/smallnest/weighted)](https://goreportcard.com/report/github.com/smallnest/weighted)
+* weighted
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/golib/weighted/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/golib/weighted/tree/master) [![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://godoc.org/github.com/golib/weighted) [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/golib/weighted/master/LICENSE)
 
 
 **rust version**: [weighted-rs](https://github.com/smallnest/weighted-rs)

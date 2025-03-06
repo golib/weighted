@@ -20,7 +20,6 @@ among peers.
 
 In case of { 5, 1, 1 } weights this gives the following sequence of
 current_weight's: (a, a, b, a, c, a, a)
-
 */
 type SW struct {
 	items []*smoothWeighted
@@ -47,7 +46,7 @@ func (w *SW) RemoveAll() {
 	w.n = 0
 }
 
-//Reset resets all current weights.
+// Reset resets all current weights.
 func (w *SW) Reset() {
 	for _, s := range w.items {
 		s.EffectiveWeight = s.Weight
@@ -85,7 +84,7 @@ func (w *SW) nextWeighted() *smoothWeighted {
 	return nextSmoothWeighted(w.items)
 }
 
-//https://github.com/phusion/nginx/commit/27e94984486058d73157038f7950a0a36ecc6e35
+// https://github.com/phusion/nginx/commit/27e94984486058d73157038f7950a0a36ecc6e35
 func nextSmoothWeighted(items []*smoothWeighted) (best *smoothWeighted) {
 	total := 0
 
